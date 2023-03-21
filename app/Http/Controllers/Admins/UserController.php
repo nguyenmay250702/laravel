@@ -11,9 +11,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(){
+        $data = User::all();
+        return view("admins/users/index",compact('data'));
     }
 
     /**
@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view("admins/users/create");
     }
 
     /**
@@ -29,7 +29,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'          =>  'required',
+            'email'         =>  'required|email',
+            'pass'      =>  'required',
+        ]);
+
+        $user = new User;
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->pass);
+
+        $user->save();
+
+        return redirect()->route('users.index')->with('success', 'User Added successfully.');
     }
 
     /**

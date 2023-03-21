@@ -17,13 +17,13 @@ class CheckLogin
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) { //kiểm tra xem người dùng đã đăng nhập hay chưa, nếu đăng nhập rồi thì next
-            if (Auth::user()->is_admin) {
-                return $next($request);
-            }
-            return redirect()->route("login")->with("error", "email hoặc pass sai");
+            // if (Auth::user()->email) {
+            //     return $next($request);
+            // }
+            // return redirect()->route("login")->with("error", "email hoặc pass sai");
+            return $next($request);
+
         }
         return redirect()->route("login")->with("error", "bạn cần đăng nhập trước");
     }
-
-//hàm tương tác với db check account sau đó gọi this.tên hàm vào trong hàm handle
 }

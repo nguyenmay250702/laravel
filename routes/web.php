@@ -23,6 +23,7 @@ Route::get('/', function () {
 });
 
 Route::middleware("auth.admin")->prefix("admins")->group(function () {
+    Route::get('logout', [DashboardController::class,"logout"])->name("admin.logout");
     Route::get('/', [DashboardController::class,"index"])->name("admin.index");
     Route::resource('categories', CategoryController::class);
     Route::resource('articles', ArticleController::class);
