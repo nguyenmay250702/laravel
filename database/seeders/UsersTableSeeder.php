@@ -19,7 +19,8 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => "Nguyễn Mây",
                 'email' => "nguyenmay308@gmail.com",
-                'password' => Hash::make("250702")
+                'password' => Hash::make("250702"),
+                'role'  =>1,
             ],
             [
                 'name' => "Nguyễn A",
