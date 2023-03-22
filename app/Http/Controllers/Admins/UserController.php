@@ -51,7 +51,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view("admins/users/show");
     }
 
     /**
@@ -59,7 +59,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view("admins/users/edit",compact("user"));
     }
 
     /**
@@ -67,7 +67,22 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'user_name'          =>  'required',
+            'user_email'         =>  'required|email',
+        ]);
+
+        //nếu người dung nhập pass mới thì cập nhật lại pass vừa nhập
+        if($request->pass_new != ""){
+            $user->password = bcrypt($request->pass_new);
+        }
+
+        $user->name = $request->user_name;
+        $user->email = $request->user_email;
+
+        $user->save();
+
+        return redirect()->route('users.index')->with('success', 'User Data has been updated successfully');
     }
 
     /**
@@ -75,6 +90,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'User Data has been delete successfully');
     }
 }

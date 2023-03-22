@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel 10 CRUD Application</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="/path/to/bootstrap/css/bootstrap.min.css"> --}}
 </head>
 <body>
     <header>
         <ul class="nav nav-pills">
             <li class="nav-item">
               <a class="nav-link" href="{{route("admin.index")}}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route("users.index")}}">User</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route("articles.index")}}">Article</a>
